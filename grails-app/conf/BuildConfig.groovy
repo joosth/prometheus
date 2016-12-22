@@ -41,6 +41,8 @@ grails.project.dependency.resolution = {
        runtime 'io.prometheus:simpleclient_hotspot:0.0.16'
        runtime 'io.prometheus:simpleclient_servlet:0.0.16'
        runtime 'io.prometheus:simpleclient_pushgateway:0.0.16'
+       runtime 'io.prometheus:simpleclient_pushgateway:0.0.16'
+       runtime 'io.prometheus.jmx:collector:0.7'
     }
 
     plugins {

@@ -20,3 +20,7 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+prometheus {
+    jmxcollectors = [default:'classpath:prometheus-jmx.yml']
+}
