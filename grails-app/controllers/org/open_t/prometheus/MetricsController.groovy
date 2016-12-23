@@ -23,7 +23,25 @@ import io.prometheus.client.exporter.common.TextFormat;
 import java.io.Writer;
 class MetricsController {
     def metricService
+    def grailsApplication
     def metrics() {
+
+        request.headerNames.each { headerName ->
+          log.trace "Received header name: ${headerName} value: ${request.getHeader(headerName)}"
+        }
+
+        if (grailsApplication.config.prometheus?.auth?.type=="basic") {
+            log.trace "Performing basic authentication ..."
+            String headerDigest=request.getHeader("authorization")
+            String configDigest="Basic "+"${grailsApplication.config.prometheus?.auth?.username}:${grailsApplication.config.prometheus?.auth?.password}".bytes.encodeBase64().toString()
+            if (configDigest!=headerDigest) {
+                log.trace "Basic authentication failed, returning. configDigest=${configDigest} headerDigest=${headerDigest}"
+                render (text:"")
+                return null
+            } else {
+                log.trace "Basic authentication passed."
+            }
+        }
 
         response.setHeader("Content-Type", TextFormat.CONTENT_TYPE_004)
 
@@ -35,5 +53,6 @@ class MetricsController {
         }
         writer.flush();
         writer.close();
+        return null
     }
 }

@@ -22,5 +22,10 @@ log4j = {
 }
 
 prometheus {
+    auth {
+        type="basic"
+        username="prometheus"
+        password="measureit"
+    }
     jmxcollectors = [default:'classpath:prometheus-jmx.yml']
 }
