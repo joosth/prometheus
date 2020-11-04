@@ -23,7 +23,7 @@ import io.prometheus.client.exporter.common.TextFormat;
 import java.io.Writer;
 class MetricsController {
     def metricService
-    def grailsApplication
+    
     def metrics() {
 
         request.headerNames.each { headerName ->

@@ -1,5 +1,13 @@
 # Git ignore list for grails project
 *.class
+Thumbs.db
+.DS_Store
+.gradle
+build/
+out/
+.idea
+*.iml
+*.ipr
 *.iws
 *.war
 .classpath
