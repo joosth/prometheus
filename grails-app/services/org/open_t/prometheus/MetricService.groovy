@@ -21,6 +21,7 @@ import io.prometheus.jmx.*
 import io.prometheus.client.hotspot.*
 import io.prometheus.client.*
 import grails.util.Holders
+import javax.annotation.PostConstruct
 
 
 class MetricService {
@@ -32,6 +33,7 @@ class MetricService {
 
     boolean transactional = false
 
+    @PostConstruct
     def init() {
         new io.prometheus.client.hotspot.DefaultExports().initialize();
         def jmxCollectorsList=grailsApplication.config.prometheus?.jmxcollectors?:[default:"classpath:prometheus-jmx.yml"]
