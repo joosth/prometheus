@@ -1,7 +1,8 @@
 package prometheus
 
-import grails.boot.*
+import grails.boot.GrailsApp
 import grails.boot.config.GrailsAutoConfiguration
+import groovy.transform.CompileStatic
 import grails.plugins.metadata.*
 
 @PluginSource
