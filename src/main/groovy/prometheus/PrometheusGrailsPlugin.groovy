@@ -5,7 +5,7 @@ import grails.plugins.*
 class PrometheusGrailsPlugin extends Plugin {
 
     // the version or versions of Grails the plugin is designed for
-       def grailsVersion = "6.1.2  > *"
+       def grailsVersion = "6.1.1  > *"
        // resources that are excluded from plugin packaging
        def pluginExcludes = [
            "grails-app/views/error.gsp"
@@ -13,11 +13,10 @@ class PrometheusGrailsPlugin extends Plugin {
 
        // TODO Fill in these fields
        def title = "Prometheus" // Headline display name of the plugin
-       def author = "Your name"
+       def author = ""
        def authorEmail = ""
-       def description = '''\
-   Brief summary/description of the plugin.
-   '''
+       def description = ""
+
    // URL to the plugin's documentation
        def documentation = "https://grails.github.io/Prometheus/"
 

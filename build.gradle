@@ -1,24 +1,22 @@
 plugins {
     id "groovy"
-    id "war"
-    id "idea"
+    id "java-library"
     id "org.grails.grails-plugin"
-    id "application"
     id "eclipse"
+    id "idea"
+    id "org.grails.grails-gsp"
 }
 
 group = "prometheus"
-
 repositories {
     mavenCentral()
     maven { url "https://repo.grails.org/grails/core/" }
+    mavenLocal()
+    gradlePluginPortal()
 }
 
 configurations {
     all {
-    }
-    moduleimplementation {
-        extendsFrom implementation
     }
 }
 
@@ -44,18 +42,13 @@ dependencies {
     testImplementation("org.spockframework:spock-core")
     testImplementation("io.micronaut:micronaut-http-client")
 
-    //Prometheus libraries
+    // Prometheus libraries
     implementation 'io.prometheus:simpleclient:0.16.0'
     implementation 'io.prometheus:simpleclient_hotspot:0.16.0'
     implementation 'io.prometheus:simpleclient_servlet:0.16.0'
     implementation 'io.prometheus:simpleclient_pushgateway:0.16.0'
     implementation 'io.prometheus:simpleclient_pushgateway:0.16.0'
     implementation 'io.prometheus.jmx:collector:0.20.0'
-
-}
-
-application {
-    mainClass.set("prometheus.Application")
 }
 
 java {
@@ -66,31 +59,10 @@ tasks.withType(Test) {
     useJUnitPlatform()
 }
 
+bootJar.enabled=false
+jar.enabled=true
+
 tasks.jar {
     archiveFileName.set("prometheus.jar")
 }
-war.enabled=false
-
-task copyToLib(type: Copy) {
-    into "${buildDir}/output/libs"
-    from configurations.all
-}
-
-build.dependsOn(copyToLib)
-
-
-task copyModuleProvidedDeps(type: Copy) {
-    group = "Build"
-    description = "Copy the dependencies that are provided by the module for Alice in the build/libs folder of the project folder. Including all the dependencies of the selected module provided dependencies."
-    timeout = Duration.ofMinutes(10)
-    def dirName ="${projectDir}/build/libs"
-    from configurations.moduleimplementation
-    into "${dirName}"
-}
-
-tasks.register('modulejar')  {
-   dependsOn tasks.jar
-   dependsOn copyModuleProvidedDeps
-}
-
 

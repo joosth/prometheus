@@ -27,3 +27,4 @@ jetty-env.xml
 ._*
 wfp.log
 activemq-data/**
+/bin/
